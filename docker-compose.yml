@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    container_name: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - local_pgdata:/var/lib/postgresql/data
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: postgres@pg.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+volumes:
+  local_pgdata:
+  pgadmin-data:
